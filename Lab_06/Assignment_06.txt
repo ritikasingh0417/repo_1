@@ -1,0 +1,169 @@
+ SELECT COUNT(*) AS Total_Students
+ FROM Student;
+
+TOTAL_STUDENTS
+--------------
+             0
+
+ SELECT COUNT(*) AS Total_Faculty
+ FROM Faculty;
+
+TOTAL_FACULTY
+-------------
+            0
+
+ SELECT COUNT(*) AS Max_Credits
+ FROM Course;
+
+MAX_CREDITS
+-----------
+          0
+
+ SELECT MAX(Credits) AS Max_Credits
+ FROM Course;
+
+MAX_CREDITS
+-----------
+
+
+ SELECT MIN(Credits) AS Min_Credits
+   from Course;
+
+MIN_CREDITS
+-----------
+
+
+ DESC Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENTID                                 NOT NULL NUMBER
+ NAME                                               VARCHAR2(100)
+ DOB                                                DATE
+ GENDER                                             CHAR(1)
+ PHONE                                              VARCHAR2(15)
+ DEPTID                                             NUMBER(38)
+ SEMESTER                                           NUMBER(38)
+
+ SELECT DeptID, COUNT(*) AS Total_Students
+   FROM Student
+   GROUP BY DeptID;
+
+no rows selected
+
+ SELECT DeptID, COUNT(*) AS Total_Faculty
+ FROM Faculty
+  GROUP BY DeptID;
+
+no rows selected
+
+SELECT DeptID, COUNT(*) AS Total_Courses
+ FROM Course
+  GROUP BY DeptID;
+
+no rows selected
+
+
+ SELECT Semester, COUNT(*) AS Total_Enrollments
+ FROM Enrollment
+ GROUP BY Semester;
+
+no rows selected
+
+ SELECT Grade, COUNT(StudentID) AS Total_Students
+ FROM Enrollment
+ GROUP BY Grade;
+
+no rows selected
+
+ SELECT DeptID, COUNT(*) AS Total_Students
+   FROM Student
+   GROUP BY DeptID
+   HAVING COUNT(*) > 3;
+
+no rows selected
+
+ SELECT Semester, COUNT(*) AS Total_Enrollments
+   FROM Enrollment
+  GROUP BY Semester
+   HAVING COUNT(*) > 2;
+
+no rows selected
+
+ SELECT Grade, Count(StudentID) AS Total
+    FROM Enrollment
+    GROUP BY Grade
+    HAVING COUNT(StudentID) > 1;
+
+no rows selected
+
+ SELECT DeptID, COUNT(*) AS Total_Courses
+   FROM Course
+   GROUP BY DeptID
+   HAVING COUNT(*) > 1;
+
+no rows selected
+
+ SELECT CourseID, COUNT(StudentID) AS Total_Students
+   FROM Enrollment
+   GROUP BY CourseID;
+
+no rows selected
+
+ SELECT Course.CourseName, COUNT(Enrollment.StudentID) AS Total_Students
+   FROM Course
+  INNER JOIN Enrollment
+   ON Course.CourseID = Enrollment.CourseID
+   GROUP BY Course.CourseName;
+
+no rows selected
+
+ SELECT DeptID, COUNT(StudentID) AS Total_Students
+   FROM Student
+   GROUP BY DeptID;
+
+no rows selected
+
+
+DESC Faculty;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ FACULTYID                                 NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(100)
+ DESIGNATION                                        VARCHAR2(100)
+ EMAIL                                              VARCHAR2(100)
+ DEPTID                                             NUMBER(38)
+
+ SELECT Faculty.Name, COUNT(Course.CourseID) AS Total_Courses
+   FROM Faculty
+   INNER JOIN Course
+   ON Faculty.FacultyID = Course.FacultyID
+   GROUP BY Faculty.Name;
+
+no rows selected
+
+ SELECT Course.CourseName, MAX(Enrollment.Grade) AS Max_Grade
+  FROM Course
+  INNER JOIN Enrollment
+  ON Course.CourseID = Enrollment.CourseID
+   GROUP BY Course.CourseName;
+
+no rows selected
+
+ SELECT DeptID, COUNT(*) AS Total_Courses
+   FROM Course
+    GROUP BY DeptID;
+
+no rows selected
+
+ SELECT Semester, COUNT(StudentID) AS Total_Students
+ FROM Enrollment
+  GROUP BY Semester;
+
+no rows selected
+
+ SELECT CourseID, COUNT(StudentID) AS Total_Student
+   FROM Enrollment
+   GROUP BY CourseID
+    HAVING COUNT(StudentID) > 2;
+
+no rows selected
